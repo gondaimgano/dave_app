@@ -53,6 +53,21 @@ class _DaveAppState extends State<DaveApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            onPressed: () async {
+              await DatabaseCreator.unarchivePersons();
+
+              setState(() {
+
+              });
+
+            },
+            icon: Icon(Icons.refresh,color: Colors.white,),
+          )
+        ],
+      ),
       body: StreamBuilder(
         stream: NetworkUtil.getAllUsers().asStream(),
         builder: (context, snapshot) {
@@ -75,7 +90,7 @@ class _DaveAppState extends State<DaveApp> {
                            );
                            await DatabaseCreator.removePerson(p);
                            setState(() {
-                             //refresh
+
                            });
 
                          }

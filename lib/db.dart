@@ -88,18 +88,12 @@ class DatabaseCreator {
     List<dynamic> people = await db
         .query(personTable, );
 
-    List<dynamic> archived=await getAllArchivePersons();
 
 
 
-    return people.where((t){
-      var s=Person.fromJson(t);
-      //return true;
-      if(archived.length>0)
-     return archived.where((s0)=>s0.username==s.username).length==0;
 
-      return true;
-    }).map((item)=>Person.fromJson(item))
+    return people
+        .map((item)=>Person.fromJson(item))
         .toList();
   }
 
@@ -137,6 +131,11 @@ class DatabaseCreator {
       person.toDBJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+  }
+
+  static void unarchivePersons() async{
+    await db.delete(
+      personDeleted,);
   }
 
 
