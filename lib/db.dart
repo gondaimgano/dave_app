@@ -91,10 +91,14 @@ class DatabaseCreator {
     List<dynamic> archived=await getAllArchivePersons();
 
 
+
     return people.where((t){
       var s=Person.fromJson(t);
       //return true;
+      if(archived.length>0)
      return archived.where((s0)=>s0.username==s.username).length==0;
+
+      return true;
     }).map((item)=>Person.fromJson(item))
         .toList();
   }

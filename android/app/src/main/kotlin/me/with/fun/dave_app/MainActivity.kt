@@ -1,4 +1,4 @@
-package me.with.fun.dave_app
+package me.with.foo.dave_app
 
 import android.os.Bundle
 
